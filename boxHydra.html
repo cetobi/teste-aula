@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<!-- ADS 08-22 -->
+<head>
+  <meta charset="UTF-8">
+  <title>Box</title>
+	<style>
+		html {box-sizing: border-box;}
+
+		*,*::after,*::before {
+		  box-sizing: inherit;
+		  margin: 0;
+		  padding: 0; 
+		}
+
+		body {
+		  width: 100vw;
+		  height: 100vh;
+		}
+
+		.card {
+		  width: 50px;
+		  height: 50px;
+		  position: absolute;
+		  border-radius: 5px;
+		  background-color: #333;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		function createBox(){
+		  const body = document.querySelector('body')
+		  const div = document.createElement('div')
+		  div.className = 'card'
+		  div.setAttribute('onclick', 'call(this)')
+  
+		  const coordenadas = body.getBoundingClientRect()
+		  const X = Math.floor(Math.random()*((coordenadas.width-50)-1))+1
+		  const Y = Math.floor(Math.random()*((coordenadas.height-50)-1))+1
+  
+		  div.style.left = `${X}px`  
+		  div.style.top = `${Y}px`
+  
+		  const cor = Math.floor(Math.random()*(16777215-256))+256
+		  div.style.backgroundColor = `#${cor.toString(16)}`
+  
+		  body.appendChild(div)
+		}
+
+		function call(e){
+		  createBox()
+		  createBox()
+		  e.parentNode.removeChild(e)
+		}
+
+		createBox()
+	</script>
+</body>
+</html>
